@@ -18,7 +18,9 @@ import javafx.stage.Stage;
 
 public class Main extends Application {
 	
-
+	TextField txtSaludo = new TextField();
+	Text txtRespNormal = new Text();
+	
     public static void main(String[] args) {
         launch(args);
     }
@@ -26,15 +28,16 @@ public class Main extends Application {
     @Override
     public void start(Stage stage) {
     	//
-    	Text mensaje = new Text("Introduzca saludo:");
-    	TextField inputFrase = new TextField();
+    	Text txtMensaje = new Text("Introduzca saludo:");
+    	
     	Button btnSaludo = new Button("Hola");
     	btnSaludo.setOnAction(e -> saludar());
     	//
     	VBox box = new VBox();
-    	box.getChildren().add(mensaje);
-    	box.getChildren().add(inputFrase);
+    	box.getChildren().add(txtMensaje);
+    	box.getChildren().add(txtSaludo);
     	box.getChildren().add(btnSaludo);
+    	box.getChildren().add(txtRespNormal);
     	//
     	Scene scene = new Scene(box, 400, 400);
         stage.setScene(scene);
@@ -43,6 +46,20 @@ public class Main extends Application {
     }
     
     private void saludar() {
+    	//
+    	if (txtSaludo.getText().equalsIgnoreCase("Obi wan")) {
+    		Stage newStage = new Stage();
+	    	newStage.setTitle("Modal");
+	    	Text txtRespSaludo = new Text();
+    		txtRespSaludo.setText("¡General Kenobi!");
+    		VBox root = new VBox();
+        	root.getChildren().add(txtRespSaludo);
+        	Scene scene = new Scene(root, 100, 150);
+        	newStage.setScene(scene);
+        	newStage.showAndWait();
+    	}else
+    		txtRespNormal.setText("Hola " + txtSaludo.getText());
+    	
     	
     }
     
