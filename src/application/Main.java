@@ -27,27 +27,35 @@ public class Main extends Application {
 
     @Override
     public void start(Stage stage) {
-    	//
-    	Text txtMensaje = new Text("Introduzca saludo:");
-    	
+    	//Componentes
+    	Text txtMensaje = new Text("Introduzca usuario:");
     	Button btnSaludo = new Button("Hola");
     	btnSaludo.setOnAction(e -> saludar());
+    	Button btnCerrar = new Button("Cerrar");
+    	btnCerrar.setOnAction(e -> Platform.exit());
     	//
     	VBox box = new VBox();
     	box.getChildren().add(txtMensaje);
     	box.getChildren().add(txtSaludo);
     	box.getChildren().add(btnSaludo);
     	box.getChildren().add(txtRespNormal);
-    	//
+    	box.getChildren().add(btnCerrar);
+    	//Escena
     	Scene scene = new Scene(box, 400, 400);
+    	stage.setResizable(false);
         stage.setScene(scene);
         stage.setTitle("Ventana");
         stage.show();
     }
     
+    /**
+     * 
+     */
     private void saludar() {
     	//
-    	if (txtSaludo.getText().equalsIgnoreCase("Obi wan")) {
+    	if (!txtSaludo.getText().equalsIgnoreCase("Obi wan")) {
+    		txtRespNormal.setText("Hola " + txtSaludo.getText());
+    	}else {
     		Stage newStage = new Stage();
 	    	newStage.setTitle("Modal");
 	    	Text txtRespSaludo = new Text();
@@ -55,12 +63,11 @@ public class Main extends Application {
     		VBox root = new VBox();
         	root.getChildren().add(txtRespSaludo);
         	Scene scene = new Scene(root, 100, 150);
+        	
         	newStage.setScene(scene);
         	newStage.showAndWait();
-    	}else
-    		txtRespNormal.setText("Hola " + txtSaludo.getText());
-    	
-    	
+    	}
+    		
     }
     
 }
